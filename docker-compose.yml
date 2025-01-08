@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-tasks
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: userAdmin
+      POSTGRES_PASSWORD: contraseñaAdmin
+      POSTGRES_DB: nameBd
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    deploy:
+      resources:
+        limits:
+          memory: 500m
+        reservations:
+          memory: 500m
+
+volumes:
+  postgres_data:
